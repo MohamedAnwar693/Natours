@@ -14,9 +14,6 @@ const signToken = id => {
 
 
 const createSendToken = async(user, statusCode, res) => {
-    // const newUser = await (user._id);
-    // createSendToken(newUser, 201, res);
-    // const token = signToken(newUser._id);
     const token = signToken(user._id);
     const cookieOptions = {
         expires: new Date(
@@ -66,11 +63,6 @@ exports.login = catchAsync(async(req, res, next) => {
 
     //3) If everything ok, send token to client
     createSendToken(user, 200, res);
-    // const token = signToken(user._id);
-    // res.status(200).json({
-    //     status: 'success',
-    //     token
-    // });
 });
 
 exports.protect = catchAsync(async(req, res, next) => {
@@ -115,7 +107,6 @@ exports.protect = catchAsync(async(req, res, next) => {
 
 exports.restrictTo = (...roles) => {
     return (req, res, next) => {
-        // role ['admin', 'lead-guide'], role="user"
         if(!roles.includes(req.user.role)) {
             return next(new AppError('You do not have permission to perform this action', 403));
         }
@@ -182,11 +173,6 @@ exports.resetPassword = catchAsync(async(req, res, next) => {
     // 4) Log the user in, send JWT
     createSendToken(user, 200, res);
 
-    // const token = signToken(user._id);
-    // res.status(200).json({
-    //     status: 'success',
-    //     token
-    // });
 });
 
 
