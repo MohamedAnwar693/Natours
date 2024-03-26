@@ -131,18 +131,7 @@ tourSchema.pre('Save', async function(next) {
     next();
 });
 
-// tourSchema.pre('save', function(next) {
-//     console.log("Will Save document....");
-//     next();
-// });
-
-// tourSchema.post('save', function(doc, next) {
-//     console.log(doc);
-//     next();
-// });
-
 /**----------| QUERY MIDDLEWARE |-----------*/
-// tourSchema.pre('find', function(next) {
 tourSchema.pre(/^find/, function(next) {
     this.find({ secretTour: { $ne: true } });
     this.start = Date.now();
